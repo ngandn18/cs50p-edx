@@ -5,17 +5,16 @@ def test_init():
     jar = Jar()
     assert(jar.size == 0)
     assert(jar.capacity == 12)
-    jar = Jar(3, 15)
-    assert(jar.size == 3)
+    jar = Jar(15)
+    assert(jar.size == 0)
     assert(jar.capacity == 15)
     # jar = Jar(-1)
 
 def test_ValueError():
     with pytest.raises(ValueError):
-        jar = Jar(0, "12")
+        jar = Jar("12")
     with pytest.raises(ValueError):
         jar = Jar(-1)
-
 
 
 def test_str():
@@ -38,11 +37,13 @@ def test_deposit():
 
 
 def test_withdraw():
-    jar = Jar(5)
-    jar.withdraw(4)
+    jar = Jar(10)
+    jar.deposit(6)
+    jar.withdraw(5)
     assert str(jar) == "🍪"
 
+def test_withdraw_Error():
     with pytest.raises(ValueError):
-        jar = Jar(2)
-        jar.withdraw(4)
+        jar = Jar()
+        jar.withdraw(1)
 
